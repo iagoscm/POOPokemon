@@ -16,71 +16,14 @@ class Pokemon:
         self.golpe3 = golpe3
         self.golpe4 = golpe4
 
-    def setNome(self, nome):
-        self.nome = nome
-    def getNome(self):
-        return self.nome
-    def setTipo(self, tipo):
-        self.tipo = tipo
-    def getTipo(self):
-        return self.tipo
-    def setAtaque(self, ataque):
-        self.ataque = ataque
-    def getAtaque(self):
-        return self.ataque
-    def setDefesa(self, defesa):
-        self.defesa = defesa
-    def getDefesa(self):
-        return self.defesa
-    def setHp(self, hp):
-        self.hp = hp
-    def getHp(self):
-        return self.hp
-    def setAtaqueEsp(self, ataqueEsp):
-        self.ataqueEsp = ataqueEsp
-    def getAtaqueEsp(self):
-        return self.ataqueEsp
-    def setDefesaEsp(self, defesaEsp):
-        self.defesaEsp = defesaEsp
-    def getDefesaEsp(self):
-        return self.defesaEsp
-    def setVelocidade(self, velocidade):
-        self.velocidade = velocidade
-    def getVelocidade(self):
-        return self.velocidade
-    def setGenero(self, genero):
-        self.genero = genero
-    def getGenero(self):
-        return self.genero
-    def setNumero(self, numero):
-        self.numero = numero
-    def getNumero(self):
-        return self.numero
-    def __setGolpe1(self, golpe1):
-        self.golpe1 = golpe1
-    def __getGolpe1(self):
-        return self.golpe1
-    def __setGolpe2(self, golpe2):
-        self.golpe2 = golpe2
-    def __getGolpe2(self):
-        return self.golpe2
-    def __setGolpe3(self, golpe3):
-        self.golpe3 = golpe3
-    def __getGolpe3(self):
-        return self.golpe3
-    def __setGolpe4(self, golpe4):
-        self.golpe4 = golpe4
-    def __getGolpe4(self):
-        return self.golpe4
-
-    def golpear(self):
-        if(self.golpe == 1):
+    def golpear(self, golpe):
+        if(golpe == 1):
             print("Golpe: " + self.golpe1)
-        elif(self.golpe == 2):
+        elif(golpe == 2):
             print("Golpe: " + self.golpe2)
-        elif(self.golpe == 3):
+        elif(golpe == 3):
             print("Golpe: " + self.golpe3)
-        elif(self.golpe == 4):
+        elif(golpe == 4):
             print("Golpe: " + self.golpe4)
 
     def restaurarVida(self):
@@ -89,3 +32,24 @@ class Pokemon:
 
     def defender(self):
         print("Defendido...")
+
+class Lendario(Pokemon):
+    def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataqueEsp, defesaEsp, velocidade, genero, golpe1, golpe2, golpe3, golpe4, golpeExtra):
+        super().__init__(numero, nome, tipo, ataque, defesa, hp, ataqueEsp, defesaEsp, velocidade, genero, golpe1, golpe2, golpe3, golpe4)
+        self.golpeExtra = golpeExtra
+
+    def golpearDuplo(self, golpe):
+        if(golpe == 1):
+            print("Golpe Duplo!: " + self.golpe1 + " e " + self.golpeExtra)
+        elif(golpe == 2):
+            print("Golpe Duplo!: " + self.golpe2 + " e " + self.golpeExtra)
+        elif(golpe == 3):
+            print("Golpe Duplo!: " + self.golpe3 + " e " + self.golpeExtra)
+        elif(golpe == 4):
+            print("Golpe Duplo!: " + self.golpe4 + " e " + self.golpeExtra)
+
+bulbasauro = Pokemon(1, "Bulbasauro", "Grama", 49, 49, 45, 65, 65, 45, "Macho", "Chicote de Cipó", "Lâmina de Folha", "Lâmina de Grama", "Lâmina de Cipó")
+giratina = Lendario(2, "Giratina", "Fantasma", 150, 100, 150, 100, 150, 90, "Macho", "Lâmina de Fantasma", "Assustar", "Ataque rápido", "Morte Súbita", "Martelo do Caos")
+
+
+
