@@ -64,3 +64,26 @@ class Pokemon:
 
     def getGenero(self):
         return self.genero
+
+    def setNumero(self, numero):
+        self.numero = numero
+
+    def getNumero(self):
+        return self.numero
+
+    def golpear(self):
+        if(self.golpe == 1):
+            print("Golpe: " + self.golpe1)
+        elif(self.golpe == 2):
+            print("Golpe: " + self.golpe2)
+        elif(self.golpe == 3):
+            print("Golpe: " + self.golpe3)
+        elif(self.golpe == 4):
+            print("Golpe: " + self.golpe4)
+
+    def restaurarVida(self):
+        self.hp = self.hp + 10
+        print("Vida restaurada: " + str(self.hp))
+
+    def defender(self):
+        print("Defendido...")
