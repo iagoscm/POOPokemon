@@ -48,6 +48,10 @@ class Lendario(Pokemon):
         elif(golpe == 4):
             print("Golpe Duplo!: " + self.golpe4 + " e " + self.golpeExtra)
 
+    def restaurarVida(self):
+        self.hp = self.hp + 100
+        print("Vida restaurada: " + str(self.hp))
+
 bulbasauro = Pokemon(1, "Bulbasauro", "Grama", 49, 49, 45, 65, 65, 45, "Macho", "Chicote de Cipó", "Lâmina de Folha", "Lâmina de Grama", "Lâmina de Cipó")
 giratina = Lendario(2, "Giratina", "Fantasma", 150, 100, 150, 100, 150, 90, "Macho", "Lâmina de Fantasma", "Assustar", "Ataque rápido", "Morte Súbita", "Martelo do Caos")
 
