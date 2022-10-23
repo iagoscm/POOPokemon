@@ -1,4 +1,4 @@
-# Pokemon Python POO
+# Pokemon POO
 
 Um pequeno projeto pessoal onde estou treinando conceitos de Orientação a Objetos nos quais não tive a oportunidade de explorar bem até o momento
 
