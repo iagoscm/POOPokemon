@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import sqlite3
 
 arquivo = open("pokemons.txt", "w")
 
@@ -73,6 +74,23 @@ giratina = Lendario(2, "Giratina", "Fantasma", 150, 100, 150, 100, 150, 90, "Mac
                     "Ataque rápido", "Morte Súbita", "Martelo do Caos")
 giratina.escrever()
 
+conexao = sqlite3.connect("pokemon.db")
+cursor = conexao.cursor()
+cursor.execute("""
+        CREATE TABLE pokemon(
+            numero text,
+            nome text)
+        """)
+cursor.execute("""
+        INSERT INTO pokemon(numero, nome)
+            VALUES(?, ?)
+            """, (bulbasauro.numero, bulbasauro.nome))
+conexao.commit()
+cursor.execute("SELECT * FROM pokemon")
+resultado = cursor.fetchone()
+print(f"Numero: {resultado[0]}\nNome: {resultado[1]}")
+cursor.close()
+conexao.close()
 
 menu = {'1': "Cadastrar Pokemon", '2': "Listar Pokemons", '3': "Batalhar", '4': "Sair"}
 
