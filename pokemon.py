@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+arquivo = open("pokemons.txt", "w")
+
+
 class Pokemon:
     def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero,
                  golpe1, golpe2, golpe3, golpe4):
@@ -15,6 +20,11 @@ class Pokemon:
         self.golpe2 = golpe2
         self.golpe3 = golpe3
         self.golpe4 = golpe4
+
+    def escrever(self):
+        arquivo.write(f"{self.numero}, {self.nome}, {self.tipo}, {self.ataque}, {self.defesa}, {self.hp}, "
+                      f"{self.ataque_esp}, {self.defesaEsp}, {self.velocidade}, {self.genero}, {self.golpe1}, "
+                      f"{self.golpe2}, {self.golpe3}, {self.golpe4}\n")
 
     def golpear(self, golpe):
         if golpe == 1:
@@ -58,8 +68,11 @@ class Lendario(Pokemon):
 
 bulbasauro = Pokemon(1, "Bulbasauro", "Grama", 49, 49, 45, 65, 65, 45, "Macho", "Chicote de Cipó", "Lâmina de Folha",
                      "Lâmina de Grama", "Lâmina de Cipó")
+bulbasauro.escrever()
 giratina = Lendario(2, "Giratina", "Fantasma", 150, 100, 150, 100, 150, 90, "Macho", "Lâmina de Fantasma", "Assustar",
                     "Ataque rápido", "Morte Súbita", "Martelo do Caos")
+giratina.escrever()
+
 
 menu = {'1': "Cadastrar Pokemon", '2': "Listar Pokemons", '3': "Batalhar", '4': "Sair"}
 
@@ -72,43 +85,43 @@ def cadastrar_pokemon():
             numero = int(input("Digite o número do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
-            break
+            return 0
         nome = input("Digite o nome do Pokemon: ")
         tipo = input("Digite o tipo do Pokemon: ")
         try:
             ataque = int(input("Digite o ataque do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
-            break
+            return 0
         try:
             defesa = int(input("Digite a defesa do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
-            break
+            return 0
         try:
             hp = int(input("Digite a vida do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
-            break
+            return 0
         try:
             ataque_esp = int(input("Digite o ataque especial do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
-            break
+            return 0
         try:
             defesa_esp = int(input("Digite a defesa especial do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
-            break
+            return 0
         try:
             velocidade = input("Digite a velocidade do Pokemon: ")
         except Exception as e:
             print(f"Algo aconteceu: {e}")
-            break
-        genero = input("Digite o gênero do Pokemon (M ou F): ")
-        if genero != 'M' or 'F':
+            return 0
+        genero = str(input("Digite o gênero do Pokemon (M ou F): "))
+        if genero != "M" and "F":
             print("Digite M ou F para gênero.")
-            break
+            return 0
         golpe1 = input("Digite o primeiro golpe do Pokemon: ")
         golpe2 = input("Digite o segundo golpe do Pokemon: ")
         golpe3 = input("Digite o terceiro golpe do Pokemon: ")
@@ -150,11 +163,14 @@ if __name__ == "__main__":
                 print("Não foi possível cadastrar o pokemon.")
             else:
                 pokemons.append(pokemon)
+                pokemon.escrever()
+                print("Pokémon cadastrado com sucesso!\n")
         elif selection == '2':
             listar_pokemons()
         elif selection == '3':
             print("Batalhar")
         elif selection == '4':
+            arquivo.close()
             break
         else:
             print("Opção inválida!")
