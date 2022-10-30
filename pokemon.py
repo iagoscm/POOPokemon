@@ -1,14 +1,14 @@
 class Pokemon:
-    def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataqueEsp, defesaEsp, velocidade, genero
-    ,golpe1, golpe2, golpe3, golpe4):
+    def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero
+                 , golpe1, golpe2, golpe3, golpe4):
         self.numero = numero
         self.nome = nome
         self.tipo = tipo
         self.ataque = ataque
         self.defesa = defesa
         self.hp = hp
-        self.ataqueEsp = ataqueEsp
-        self.defesaEsp = defesaEsp
+        self.ataque_esp = ataque_esp
+        self.defesaEsp = defesa_esp
         self.velocidade = velocidade
         self.genero = genero
         self.golpe1 = golpe1
@@ -26,7 +26,7 @@ class Pokemon:
         elif(golpe == 4):
             print("Golpe: " + self.golpe4)
 
-    def restaurarVida(self):
+    def restaurar_vida(self):
         self.hp = self.hp + 10
         print("Vida restaurada...\nVida atual: " + str(self.hp))
 
@@ -34,46 +34,39 @@ class Pokemon:
         print("Defendido...")
 
 class Lendario(Pokemon):
-    def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataqueEsp, defesaEsp, velocidade, genero, golpe1, golpe2, golpe3, golpe4, golpeExtra):
-        super().__init__(numero, nome, tipo, ataque, defesa, hp, ataqueEsp, defesaEsp, velocidade, genero, golpe1, golpe2, golpe3, golpe4)
-        self.golpeExtra = golpeExtra
+    def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero, golpe1, golpe2, golpe3, golpe4, golpe_extra):
+        super().__init__(numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero, golpe1, golpe2, golpe3, golpe4)
+        self.golpe_extra = golpe_extra
 
-    def golpearDuplo(self, golpe):
+    def golpear_duplo(self, golpe):
         if(golpe == 1):
-            print("Golpe Duplo!: " + self.golpe1 + " e " + self.golpeExtra)
+            print("Golpe Duplo!: " + self.golpe1 + " e " + self.golpe_extra)
         elif(golpe == 2):
-            print("Golpe Duplo!: " + self.golpe2 + " e " + self.golpeExtra)
+            print("Golpe Duplo!: " + self.golpe2 + " e " + self.golpe_extra)
         elif(golpe == 3):
-            print("Golpe Duplo!: " + self.golpe3 + " e " + self.golpeExtra)
+            print("Golpe Duplo!: " + self.golpe3 + " e " + self.golpe_extra)
         elif(golpe == 4):
-            print("Golpe Duplo!: " + self.golpe4 + " e " + self.golpeExtra)
+            print("Golpe Duplo!: " + self.golpe4 + " e " + self.golpe_extra)
 
-    def restaurarVida(self):
+    def restaurar_vida(self):
         self.hp = self.hp + 100
         print("Vida restaurada...\nVida atual: " + str(self.hp))
 
 bulbasauro = Pokemon(1, "Bulbasauro", "Grama", 49, 49, 45, 65, 65, 45, "Macho", "Chicote de Cipó", "Lâmina de Folha", "Lâmina de Grama", "Lâmina de Cipó")
 giratina = Lendario(2, "Giratina", "Fantasma", 150, 100, 150, 100, 150, 90, "Macho", "Lâmina de Fantasma", "Assustar", "Ataque rápido", "Morte Súbita", "Martelo do Caos")
 
-menu = {}
-menu['1'] = "Cadastrar Pokemon"
-menu['2'] = "Listar Pokemons"
-menu['3'] = "Batalhar"
-menu['4'] = "Sair"
+menu = {'1': "Cadastrar Pokemon", '2': "Listar Pokemons", '3': "Batalhar", '4': "Sair"}
 
-pokemons = []
-pokemons.append(bulbasauro)
-pokemons.append(giratina)
-
-def cadastrarPokemon():
+pokemons = [bulbasauro, giratina]
+def cadastrar_pokemon():
     numero = input("Digite o número do Pokemon: ")
     nome = input("Digite o nome do Pokemon: ")
     tipo = input("Digite o tipo do Pokemon: ")
     ataque = input("Digite o ataque do Pokemon: ")
     defesa = input("Digite a defesa do Pokemon: ")
     hp = input("Digite a vida do Pokemon: ")
-    ataqueEsp = input("Digite o ataque especial do Pokemon: ")
-    defesaEsp = input("Digite a defesa especial do Pokemon: ")
+    ataque_esp = input("Digite o ataque especial do Pokemon: ")
+    defesa_esp = input("Digite a defesa especial do Pokemon: ")
     velocidade = input("Digite a velocidade do Pokemon: ")
     genero = input("Digite o gênero do Pokemon: ")
     golpe1 = input("Digite o primeiro golpe do Pokemon: ")
@@ -81,11 +74,11 @@ def cadastrarPokemon():
     golpe3 = input("Digite o terceiro golpe do Pokemon: ")
     golpe4 = input("Digite o quarto golpe do Pokemon: ")
 
-    pokemon = Pokemon(numero, nome, tipo, ataque, defesa, hp, ataqueEsp, defesaEsp, velocidade, genero, golpe1, golpe2, golpe3, golpe4)
+    pokemon = Pokemon(numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero, golpe1, golpe2, golpe3, golpe4)
 
     return pokemon
 
-def listarPokemons():
+def listar_pokemons():
     for pokemon in pokemons:
         print("Número: " + str(pokemon.numero))
         print("Nome: " + pokemon.nome)
@@ -93,7 +86,7 @@ def listarPokemons():
         print("Ataque: " + str(pokemon.ataque))
         print("Defesa: " + str(pokemon.defesa))
         print("HP: " + str(pokemon.hp))
-        print("Ataque Especial: " + str(pokemon.ataqueEsp))
+        print("Ataque Especial: " + str(pokemon.ataque_esp))
         print("Defesa Especial: " + str(pokemon.defesaEsp))
         print("Velocidade: " + str(pokemon.velocidade))
         print("Gênero: " + pokemon.genero)
