@@ -14,7 +14,7 @@ pokemons = [bulbasauro, giratina]
 
 conexao = sqlite3.connect("pokemon.db")
 cursor = conexao.cursor()
-cursor.execute('CREATE TABLE pokemon( numero text, nome text)')
+cursor.execute('CREATE TABLE IF NOT EXISTS pokemon( numero text, nome text)')
 
 for poke in pokemons:
     cursor.execute("""
