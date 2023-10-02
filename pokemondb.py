@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sqlite3
 from pokemon import Pokemon, Lendario
 
@@ -8,20 +10,21 @@ giratina = Lendario(2, "Giratina", "Fantasma", 150, 100, 150, 100, 150, 90, "Mac
                     "Ataque rápido", "Morte Súbita", "Martelo do Caos")
 giratina.escrever()
 
+pokemons = [bulbasauro, giratina]
+
 conexao = sqlite3.connect("pokemon.db")
 cursor = conexao.cursor()
-cursor.execute("""
-        CREATE TABLE pokemon(
-            numero text,
-            nome text)
-        """)
-cursor.execute("""
-        INSERT INTO pokemon(numero, nome)
-            VALUES(?, ?)
-            """, (bulbasauro.numero, bulbasauro.nome))
-conexao.commit()
-cursor.execute("SELECT * FROM pokemon")
-resultado = cursor.fetchone()
-print(f"Numero: {resultado[0]}\nNome: {resultado[1]}")
+cursor.execute('CREATE TABLE pokemon( numero text, nome text)')
+
+for poke in pokemons:
+    cursor.execute("""
+            INSERT INTO pokemon(numero, nome)
+                VALUES(?, ?)
+                """, (poke.numero, poke.nome))
+    conexao.commit()
+    cursor.execute("SELECT * FROM pokemon")
+    print(f'Numero: {poke.numero}\nNome: {poke.nome}')
+
 cursor.close()
 conexao.close()
+
