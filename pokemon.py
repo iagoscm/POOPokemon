@@ -44,7 +44,6 @@ class Pokemon:
     def defender(self):
         print("Defendido...")
 
-
 class Lendario(Pokemon):
     def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero, golpe1,
                  golpe2, golpe3, golpe4, golpe_extra):
@@ -65,32 +64,6 @@ class Lendario(Pokemon):
     def restaurar_vida(self):
         self.hp = self.hp + 100
         print("Vida restaurada...\nVida atual: " + str(self.hp))
-
-
-bulbasauro = Pokemon(1, "Bulbasauro", "Grama", 49, 49, 45, 65, 65, 45, "Macho", "Chicote de Cipó", "Lâmina de Folha",
-                     "Lâmina de Grama", "Lâmina de Cipó")
-bulbasauro.escrever()
-giratina = Lendario(2, "Giratina", "Fantasma", 150, 100, 150, 100, 150, 90, "Macho", "Lâmina de Fantasma", "Assustar",
-                    "Ataque rápido", "Morte Súbita", "Martelo do Caos")
-giratina.escrever()
-
-conexao = sqlite3.connect("pokemon.db")
-cursor = conexao.cursor()
-cursor.execute("""
-        CREATE TABLE pokemon(
-            numero text,
-            nome text)
-        """)
-cursor.execute("""
-        INSERT INTO pokemon(numero, nome)
-            VALUES(?, ?)
-            """, (bulbasauro.numero, bulbasauro.nome))
-conexao.commit()
-cursor.execute("SELECT * FROM pokemon")
-resultado = cursor.fetchone()
-print(f"Numero: {resultado[0]}\nNome: {resultado[1]}")
-cursor.close()
-conexao.close()
 
 menu = {'1': "Cadastrar Pokemon", '2': "Listar Pokemons", '3': "Batalhar", '4': "Sair"}
 
