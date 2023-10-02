@@ -3,7 +3,6 @@ import sqlite3
 
 arquivo = open("pokemons.txt", "w")
 
-
 class Pokemon:
     def __init__(self, numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero,
                  golpe1, golpe2, golpe3, golpe4):
@@ -67,8 +66,7 @@ class Lendario(Pokemon):
 
 menu = {'1': "Cadastrar Pokemon", '2': "Listar Pokemons", '3': "Batalhar", '4': "Sair"}
 
-pokemons = [bulbasauro, giratina]
-
+pokemons = []
 
 def cadastrar_pokemon():
     while True:
@@ -80,32 +78,32 @@ def cadastrar_pokemon():
         nome = input("Digite o nome do Pokemon: ")
         tipo = input("Digite o tipo do Pokemon: ")
         try:
-            ataque = int(input("Digite o ataque do Pokemon: "))
+            ataque = int(input("Digite o número de ataque do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
             return 0
         try:
-            defesa = int(input("Digite a defesa do Pokemon: "))
+            defesa = int(input("Digite a número de defesa do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
             return 0
         try:
-            hp = int(input("Digite a vida do Pokemon: "))
+            hp = int(input("Digite a número da vida do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
             return 0
         try:
-            ataque_esp = int(input("Digite o ataque especial do Pokemon: "))
+            ataque_esp = int(input("Digite o número do ataque especial do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
             return 0
         try:
-            defesa_esp = int(input("Digite a defesa especial do Pokemon: "))
+            defesa_esp = int(input("Digite a número da defesa especial do Pokemon: "))
         except Exception as e:
             print(f"Algo aconteceu: {e}")
             return 0
         try:
-            velocidade = input("Digite a velocidade do Pokemon: ")
+            velocidade = input("Digite a número de velocidade do Pokemon: ")
         except Exception as e:
             print(f"Algo aconteceu: {e}")
             return 0
@@ -113,13 +111,26 @@ def cadastrar_pokemon():
         if genero != "M" and "F":
             print("Digite M ou F para gênero.")
             return 0
-        golpe1 = input("Digite o primeiro golpe do Pokemon: ")
-        golpe2 = input("Digite o segundo golpe do Pokemon: ")
-        golpe3 = input("Digite o terceiro golpe do Pokemon: ")
-        golpe4 = input("Digite o quarto golpe do Pokemon: ")
+        golpe1 = input("Digite o nome do primeiro golpe do Pokemon: ")
+        golpe2 = input("Digite o nome do segundo golpe do Pokemon: ")
+        golpe3 = input("Digite o nome do terceiro golpe do Pokemon: ")
+        golpe4 = input("Digite o nome do quarto golpe do Pokemon: ")
 
         poke = Pokemon(numero, nome, tipo, ataque, defesa, hp, ataque_esp, defesa_esp, velocidade, genero, golpe1,
                        golpe2, golpe3, golpe4)
+
+        conexao = sqlite3.connect("pokemon.db")
+        cursor = conexao.cursor()
+        cursor.execute("""
+                INSERT INTO pokemon(numero, nome)
+                    VALUES(?, ?)
+                    """, (poke.numero, poke.nome))
+        conexao.commit()
+        cursor.execute("SELECT * FROM pokemon")
+        resultado = cursor.fetchone()
+        print(f"Numero: {resultado[0]}\nNome: {resultado[1]}")
+        cursor.close()
+        conexao.close()
 
         return poke
 
@@ -163,5 +174,12 @@ if __name__ == "__main__":
         elif selection == '4':
             arquivo.close()
             break
+        elif selection == '5':
+            print("a")
+            conexao = sqlite3.connect("pokemon.db")
+            cursor = conexao.cursor()
+            cursor.execute("SELECT * FROM pokemon")
+            resultado = cursor.fetchall()
+            print(resultado)
         else:
             print("Opção inválida!")
